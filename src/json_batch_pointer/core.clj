@@ -23,11 +23,6 @@
       
     nil))
 
-(defn log
-  [s x]
-  (println s x)
-  x)
-
 (defn extract
   [ptr json]
   (when-let [array-selector (and (> 1 (count ptr)) (first (filter vector? ptr)))]

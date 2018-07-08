@@ -1,14 +1,30 @@
-# json-batch-pointer
+# JSON Batch Pointer
 
-A Clojure library designed to ... well, that part is up to you.
+Like [JSON Pointer](https://tools.ietf.org/html/rfc6901), except that it:
 
-## Usage
+* can be used to refer to multiple items in a JSON document at once
+* is JSON itself, and can therefore be embedded in JSON documents or sent via the `application/json` content type
 
-FIXME
+## Example Usage
 
-## License
+Given the following JSON document:
 
-Copyright © 2018 FIXME
+```json
+```
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+and this corresponding JSON batch pointer:
+
+```json
+```
+
+one can expect the following extraction:
+
+```json
+```
+
+## Distribution
+
+* Clojure
+    TODO
+* Java/Maven
+    TODO
