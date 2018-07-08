@@ -9,7 +9,7 @@ Like [JSON Pointer](https://tools.ietf.org/html/rfc6901), except that it:
 
 Given the following JSON document:
 
-```json
+```javascript
 {
     "foo": 23,
     "bar": "hello",
@@ -33,7 +33,7 @@ Given the following JSON document:
 
 and this corresponding JSON batch pointer:
 
-```json
+```javascript
 [
     "foo",  // select "foo" from the root document
     {
@@ -54,7 +54,7 @@ and this corresponding JSON batch pointer:
 
 one can expect the following extraction:
 
-```json
+```javascript
 {
     "foo": 23,
     "baz": {
