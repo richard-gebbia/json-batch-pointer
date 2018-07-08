@@ -2,5 +2,5 @@
   :description "Multiple JSON pointers at once"
   :url "https://github.com/richard-gebbia/json-batch-pointer"
   :license {:name "BSD 2-Clause"
-            :url "https://opensource.org/licenses/BSD-2-Clause"
+            :url "https://opensource.org/licenses/BSD-2-Clause"}
   :dependencies [[org.clojure/clojure "1.8.0"]])

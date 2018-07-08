@@ -10,4 +10,7 @@
     (is (= {"foo" {"bar" 3}} (extract [{"foo" ["bar"]}] {"foo" {"bar" 3 "baz" 12} "quux" :hello}))))
   (testing "each-item array selectors"
     (is (= [{"foo" 3 "bar" 4} {"foo" 5 "bar" 6}] 
-           (extract [["foo" "bar"]] [{"foo" 3 "bar" 4 "baz" :hello} {"foo" 5 "bar" 6 "baz" :goodbye}])))))
+           (extract [["foo" "bar"]] [{"foo" 3 "bar" 4 "baz" :hello} {"foo" 5 "bar" 6 "baz" :goodbye}]))))
+  (testing "Nonexistent key"
+    (is (= {} (extract ["foo"] {"bar" 3})))
+    (is (= {} (extract ["foo"] {})))))
