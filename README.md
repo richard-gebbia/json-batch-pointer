@@ -24,7 +24,7 @@ one can expect the following extraction:
 
 ## Distribution
 
-* Clojure
+* Clojure (1.8 and above)
     TODO
 * Java/Maven
     TODO
