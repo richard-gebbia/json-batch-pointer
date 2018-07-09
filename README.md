@@ -87,6 +87,14 @@ More detailed, specification-like documentation TODO.
 
 ## Distribution
 
-* Clojure (1.8 and above): `[json-batch-pointer "0.1.0"]`
-* Java/Maven
-    TODO
+### Clojure (1.8 and above)
+
+```
+[json-batch-pointer "0.1.0"]
+```
+
+This library exposes one function: `(extract ptr json)`, where `ptr` is a JSON batch pointer and `json` is a target document. The function expects both `ptr` and `json` to be decoded from JSON into Clojure data structures using the likes of [clj-json](https://github.com/mmcgrana/clj-json) or [Cheshire](https://github.com/dakrone/cheshire).
+
+### Java (Maven/Gradle)
+
+TODO
