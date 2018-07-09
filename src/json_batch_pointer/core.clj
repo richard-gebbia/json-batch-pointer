@@ -9,6 +9,10 @@
 (defn extract-field
   [field json]
   (condp what-is field
+    ;; special case, getting the length of an array
+    #(= "length" %)
+      (when (vector? json) (count json))
+
     string?
       ;; first just try to grab the value from the object
       (let [val (get json field)]
