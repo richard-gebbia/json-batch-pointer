@@ -89,9 +89,7 @@ More detailed, specification-like documentation: https://github.com/richard-gebb
 
 ### Clojure (1.8 and above)
 
-```
-[json-batch-pointer "0.1.0"]
-```
+[![Clojars Project](https://img.shields.io/clojars/v/json-batch-pointer.svg)](https://clojars.org/json-batch-pointer)
 
 This library exposes one function: `(extract ptr json)`, where `ptr` is a JSON batch pointer and `json` is a target document. The function expects both `ptr` and `json` to be decoded from JSON into Clojure data structures using the likes of [clj-json](https://github.com/mmcgrana/clj-json) or [Cheshire](https://github.com/dakrone/cheshire).
 
