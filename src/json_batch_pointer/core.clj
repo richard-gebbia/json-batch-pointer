@@ -4,8 +4,6 @@
   [pred val]
   (pred val))
 
-(declare extract)
-
 (defn extract-field
   [field json]
   (condp what-is field
