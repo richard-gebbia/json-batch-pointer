@@ -87,7 +87,6 @@ More detailed, specification-like documentation TODO.
 
 ## Distribution
 
-* Clojure (1.8 and above)
-    TODO
+* Clojure (1.8 and above): `[json-batch-pointer "0.1.0"]`
 * Java/Maven
     TODO
