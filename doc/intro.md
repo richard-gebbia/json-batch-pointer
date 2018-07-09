@@ -2,10 +2,10 @@
 
 ## Abstract
 
-JSON Batch Pointer defines a syntax that itself conforms to JavaScript Object Notation (JSON) for identifying multiple values within a JSON document. The goal of JSON batch pointer is to have a competitor to GraphQL that:
+JSON Batch Pointer defines a syntax that itself conforms to JavaScript Object Notation (JSON) for identifying multiple values within a JSON document. The goal of JSON batch pointer is to have a competitor to [GraphQL](https://graphql.org/) queries (not mutations) that:
 - is JSON (can be sent with the `application/json` content-type and can be parsed/serialized/manipulated using the numerous available JSON libraries)
-- is open-standard (not owned by a corporation)
-- does not have a type system, allowing it to more easily be used by programming languages with no or weak type systems
+- maps a request to data rather than to an API
+- does not have a type system, lowering the scope and barrier to entry, and allowing it to more easily be used by programming languages with no or weak type systems
 
 A valid JSON Batch pointer must be a JSON array. Each item in the array must be either:
 - a JSON string,

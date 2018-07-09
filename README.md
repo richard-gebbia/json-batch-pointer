@@ -83,7 +83,7 @@ one can expect the following extraction:
 
 ## Documentation
 
-More detailed, specification-like documentation TODO.
+More detailed, specification-like documentation: https://github.com/richard-gebbia/json-batch-pointer/blob/master/doc/intro.md.
 
 ## Distribution
 
