@@ -23,33 +23,39 @@
     number? 
       (get json field)
       
-    nil))
+    (throw (ex-info "Invalid selector" {:selector field}))))
 
 (defn maybe-assoc
   "Like `assoc` except it's a no-op if the value to associate is `nil`."
   [m k v]
   (if (some? v) (assoc m k v) m))
 
+(declare extract)
+
+(defn sub-extract
+  [ptr json]
+  (try
+    (extract ptr json)
+    (catch Exception e (throw (ex-info "Sub-selector error"
+      {:ptr ptr
+       :exception e})))))
+
 (defn extract
   [ptr json]
-  (when-let [array-selector (and (> 1 (count ptr)) (first (filter vector? ptr)))]
+  (when-let [array-selector (and (< 1 (count ptr)) (first (filter vector? ptr)))]
     (throw (ex-info "An each-item array selector can't be mixed with other selectors."
                     {:item array-selector})))
   (if-let [array-selector (and (= 1 (count ptr)) (vector? (first ptr)) (first ptr))]
     (mapv #(extract array-selector %) json)
     (reduce (fn [state ptr-elem]
-              (try
                 (if (map? ptr-elem)
                   (reduce (fn [state [k v]] 
                             (or (some->> (get json k)
-                                         (extract v)
+                                         (sub-extract v)
                                          (maybe-assoc state k))
                                 state))
                             state
                             ptr-elem)
-                  (maybe-assoc state (str ptr-elem) (extract-field ptr-elem json)))
-                (catch Exception e (throw (ex-info "Sub-selector error"
-                                                  {:ptr ptr-elem
-                                                   :exception e})))))
+                  (maybe-assoc state (str ptr-elem) (extract-field ptr-elem json))))
             {}
             ptr)))
