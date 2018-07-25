@@ -1,5 +1,7 @@
 # JSON Batch Pointer
 
+![CircleCI Status](https://circleci.com/gh/richard-gebbia/json-batch-pointer/tree/master.svg?style=shield&circle-token=8dffceeb82ca0c90d126e585fccdaef0cdd36ac0)
+
 Like [JSON Pointer](https://tools.ietf.org/html/rfc6901), except that it:
 
 * can be used to refer to multiple items in a JSON document at once
