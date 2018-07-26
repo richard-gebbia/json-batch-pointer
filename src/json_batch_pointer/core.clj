@@ -1,4 +1,5 @@
-(ns json-batch-pointer.core)
+(ns json-batch-pointer.core
+  (:require [cheshire.core :as json]))
 
 (defn what-is
   [pred val]
@@ -59,3 +60,7 @@
                   (maybe-assoc state (str ptr-elem) (extract-field ptr-elem json))))
             {}
             ptr)))
+
+(defn extract-str
+  [ptr-str json-str]
+  (json/encode (extract (json/decode ptr-str) (json/decode json-str))))
