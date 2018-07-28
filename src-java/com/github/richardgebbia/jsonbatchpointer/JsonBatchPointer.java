@@ -11,14 +11,13 @@ public final class JsonBatchPointer {
             extractFn = loadExtractFn();
         }
 
-        return extractFn.invoke(pointer, jsonDoc);
+        return (String)extractFn.invoke(pointer, jsonDoc);
     }
 
-    private static void loadExtractFn() {
+    private static IFn loadExtractFn() {
         IFn require = Clojure.var("clojure.core", "require");
         require.invoke(Clojure.read("json-batch-pointer.core"));
 
         return Clojure.var("json-batch-pointer.core", "extract-str");
     }
-
 }
