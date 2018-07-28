@@ -93,8 +93,38 @@ More detailed, specification-like documentation: https://github.com/richard-gebb
 
 [![Clojars Project](https://img.shields.io/clojars/v/json-batch-pointer.svg)](https://clojars.org/json-batch-pointer)
 
+Leiningen/Boot
+```
+[json-batch-pointer "0.2.0"]
+```
+
 This library exposes one function: `(extract ptr json)`, where `ptr` is a JSON batch pointer and `json` is a target document. The function expects both `ptr` and `json` to be decoded from JSON into Clojure data structures using the likes of [clj-json](https://github.com/mmcgrana/clj-json) or [Cheshire](https://github.com/dakrone/cheshire).
 
-### Java (Maven/Gradle)
+### Java
 
-TODO
+Maven
+```
+<dependency>
+  <groupId>json-batch-pointer</groupId>
+  <artifactId>json-batch-pointer</artifactId>
+  <version>0.2.0</version>
+</dependency>
+```
+
+Gradle
+```
+compile 'json-batch-pointer:json-batch-pointer:0.2.0'
+```
+
+Example usage:
+```java
+import com.github.richardgebbia.jsonbatchpointer.JsonBatchPointer;
+
+class MyClass {
+    public void myMethod() {
+        String pointer = "[\"foo\"]";
+        String targetDocument = "{\"foo\": 3}";
+        String extraction = JsonBatchPointer.extract(pointer, targetDocument));
+    }
+}
+```
