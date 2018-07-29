@@ -9,6 +9,10 @@
   
   (testing "sub-selectors"
     (is (= {"foo" {"bar" 3}} (extract [{"foo" ["bar"]}] {"foo" {"bar" 3 "baz" 12} "quux" :hello}))))
+
+  (testing "array indexes"
+    (is (= {"-" "bye"} (extract ["-"] ["hi" "bye"])))
+    (is (= {"-2" "bar"} (extract [-2] ["foo" "bar" "baz"]))))
   
   (testing "each-item array selectors"
     (is (= [{"foo" 3 "bar" 4} {"foo" 5 "bar" 6}] 
@@ -23,7 +27,8 @@
   (testing "array length"
     (is (= {"length" 3} (extract ["length"] [1 2 3])))
     (is (= {"length" 0} (extract ["length"] [])))
-    (is (= {} (extract ["length"] {"foo" "bar"}))))
+    (is (= {} (extract ["length"] {"foo" "bar"})))
+    (is (= {"length" "3km"} (extract ["length"] {"length" "3km"}))))
 
   (testing "error cases"
     (is (thrown-with-msg? Exception #"Invalid selector" (extract [:foo] {:foo 3})))

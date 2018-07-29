@@ -5,24 +5,35 @@
   [pred val]
   (pred val))
 
+(defn extract-index
+  [index json]
+  (if (neg-int? index)
+    (get json (+ index (count json)))
+    (get json index)))
+
 (defn extract-field
   [field json]
   (condp what-is field
     ;; special case, getting the length of an array
-    #(= "length" %)
-      (when (vector? json) (count json))
+    #(and (vector? json) (= "length" %))
+      (count json)
+
+    ;; special case, getting the last item in an array, like how it's done in JSON Patch
+    #(and (vector? json) (= "-" %))
+      (last json)
 
     string?
       ;; first just try to grab the value from the object
       (let [val (get json field)]
         (or val
             ;; if we can't, try and parse it as a number and get a vector value
-            (try (->> (Integer/parseUnsignedInt field)
-                      (get json))
-                 (catch NumberFormatException _ nil))))
+            (try
+              (let [index (Integer/parseInt field)]
+                (extract-index index json))
+              (catch NumberFormatException _ nil))))
     
-    number? 
-      (get json field)
+    int?
+      (extract-index field json)
       
     (throw (ex-info "Invalid selector" {:selector field}))))
 
