@@ -11,13 +11,15 @@ JSON Batch Pointer defines a syntax that itself conforms to JavaScript Object No
 
 A valid JSON Batch pointer must be a JSON array. Each item in the array must be either:
 - a JSON string,
-- a JSON number,
+- a JSON number (integers only),
 - a JSON object, or
 - a JSON array
 
 ### String selectors
 
-If the item is a string, it refers to a key in the root level of the target document. If the target document represents an array, valid string items in the JSON batch pointer represent indexes into the array as well as the "length" key to get the number of items in the target array. In this way, arrays are treated like objects.
+If the item is a string, it refers to a key in the root level of the target document. If the target document represents an array, valid string items in the JSON batch pointer include the "length" key to get the number of items in the target array. If the string can be parsed into a number and the target document is an array, it is treated as though it is a number selector (explained below).
+
+Also if the target document is an array, the special string selector `"-"` can be used to point to the last element in the array. This behavior exists to mimic [JSON Patch](http://jsonpatch.com/#json-pointer).
 
 #### Examples
 1. 
@@ -25,18 +27,23 @@ If the item is a string, it refers to a key in the root level of the target docu
   - JSON batch pointer: `["foo"]`
   - Should retrieve: `{ "foo": "bar" }`
 2.
-  - Target document: `["hello", "goodbye", -17]`
-  - JSON batch pointer: `["0", "2", "length"]`
-  - Should retrieve: `{ "0":  "hello", "2": -17, "length": 3 }`
+  - Target document: `["hello", "goodbye", -17, false]`
+  - JSON batch pointer: `["0", "2", "length", "-"]`
+  - Should retrieve: `{ "0":  "hello", "2": -17, "length": 4, "-": false }`
 
 ### Number selectors
 
-If the item is a number, it is only valid if the target document is an array. The number is an index into the array.
+If the item is a number, it is only valid if it is an integer and the target document is an array. The number is an index into the array. The number can be negative, in which case it indexes into the end of the array. A value of -1 points to the last element in the target array, a value of -2 points to the second-to-last element in the target array, etc.
 
 #### Example
+1.
 - Target document: `["hello", "goodbye", -17]`
 - JSON batch pointer: `[0, 2]`
 - Should retrieve: `{ "0": "hello", "2": -17 }`
+2.
+- Target document: `["foo", true, 50, { "hi": "bye" }]`
+- JSON batch pointer: `[1, -1]`
+- Should retrieve: `{ "1": true, "-1": { "hi": "bye" }}`
 
 ### Object selectors
 
