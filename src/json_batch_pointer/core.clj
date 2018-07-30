@@ -36,7 +36,7 @@
                 (extract-index index json))
               (catch NumberFormatException _ nil))))
     
-    int?
+    integer?
       (extract-index field json)
       
     (throw (ex-info "Invalid selector" {:selector field}))))
