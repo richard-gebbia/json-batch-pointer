@@ -5,6 +5,10 @@
   [pred val]
   (pred val))
 
+(defn neg-int?
+  [x]
+  (and (integer? x) (neg? x)))
+
 (defn extract-index
   [index json]
   (if (neg-int? index)
